@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Search Ship</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+
+    <style>
+        /* Custom CSS goes here */
+        body {
+            background-image: url('https://img1.goodfon.com/wallpaper/nbig/2/6a/compass-kompas-lupa-loupe.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card {
+            max-width: 500px;
+            margin: 0 auto;
+            margin-top: 50px;
+            padding: 30px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.8) !important;
+            border-radius: 10px;
+        }
+
+        .card-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-search {
+            background-color: #007bff !important;
+            color: #fff !important;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div th:include="navbar"></div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <h5 class="card-title">Search between destinations</h5>
+
+                <form th:action="@{/search-ship}" th:method="post" th:object="${searchForm}">
+                    <div class="form-group">
+                        <label for="from">From:</label>
+                        <select class="form-select" id="from" name="from">
+                            <option value="">Select a location</option>
+                            <option th:each="source: ${sources}" th:value="${source}" th:text="${source}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="to">To:</label>
+                        <select class="form-select" id="to" name="to">
+                            <option value="">Select a location</option>
+                            <option th:each="destination: ${destinations}" th:value="${destination}"
+                                    th:text="${destination}"></option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-search" id="searchButton" disabled>Search Ship</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // After
+    $(document).ready(function () {
+        function toggleSearchButton() {
+            var from = $('#from').val();
+            var to = $('#to').val();
+            if (from !== '' && to !== '') {
+                $('#searchButton').prop('disabled', false);
+            } else {
+                $('#searchButton').prop('disabled', true);
+            }
+        }
+
+        // When a source is selected
+        $('#from').change(function () {
+            var selectedSource = $(this).val();
+
+            // Enable all destinations first
+            $('#to option').prop('disabled', false);
+
+            // Disable the selected source in destinations
+            if (selectedSource !== '') {
+                $('#to option[value="' + selectedSource + '"]').prop('disabled', true);
+            }
+
+            toggleSearchButton();
+        });
+
+        // When a destination is selected
+        $('#to').change(function () {
+            var selectedDestination = $(this).val();
+
+            // Enable all sources first
+            $('#from option').prop('disabled', false);
+
+            // Disable the selected destination in sources
+            if (selectedDestination !== '') {
+                $('#from option[value="' + selectedDestination + '"]').prop('disabled', true);
+            }
+
+            toggleSearchButton();
+        });
+
+        // Initial check
+        toggleSearchButton();
+    });
+</script>
+
+</body>
+</html>

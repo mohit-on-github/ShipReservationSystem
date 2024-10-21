@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Ticket</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+  <style>
+    @media print {
+      /* Hide the print button when printing */
+      .print-button {
+        display: none;
+      }
+    }
+
+    .ticket-container {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .ticket-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .ticket-header h1 {
+      color: #007bff;
+      font-size: 24px;
+    }
+
+    .ticket-details {
+      margin-bottom: 20px;
+    }
+
+    .ticket-details strong {
+      display: inline-block;
+      width: 300px;
+      font-weight: bold;
+    }
+
+    .print-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:include="navbar"></div>
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="ticket-container">
+        <div class="ticket-header">
+          <h1>Ticket</h1>
+        </div>
+        <div class="ticket-details">
+          <strong>Booking ID:</strong> <span th:text="${booking.bookingId}"></span>
+        </div>
+        <div class="ticket-details">
+          <strong>Passenger Name:</strong> <span th:text="${booking.passengerName}"></span>
+        </div>
+
+        <div class="ticket-details">
+          <strong>Age:</strong> <span th:text="${booking.age}"></span>
+        </div>
+
+        <div class="ticket-details">
+          <strong>User Email:</strong> <span th:text="${booking.user.userEmail}"></span>
+        </div>
+
+        <div class="ticket-details">
+          <strong>Mobile No:</strong> <span th:text="${booking.user.mobNo}"></span>
+        </div>
+        <div class="ticket-details">
+          <strong>Ship ID:</strong> <span th:text="${booking.ship.shipId}"></span>
+        </div>
+        <div class="ticket-details">
+          <strong>Ship Model:</strong> <span th:text="${booking.ship.shipModel}"></span>
+        </div>
+        <div class="ticket-details">
+          <strong>Source:</strong> <span th:text="${booking.ship.source}"></span>
+        </div>
+        <div class="ticket-details">
+          <strong>Destination:</strong> <span th:text="${booking.ship.destination}"></span>
+        </div>
+        <div class="ticket-details">
+          <strong>Date of Journey:</strong> <span th:text="${booking.ship.dateOfJourney}"></span>
+        </div>
+        <div class="ticket-details">
+          <strong>Price:</strong> <span th:text="${booking.ship.price}"></span>
+        </div>
+        <div class="print-button">
+          <a  class="btn btn-primary" onclick="window.print()">Print</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

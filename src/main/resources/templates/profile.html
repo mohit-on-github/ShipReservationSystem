@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+  <style>
+    body {
+      background-image: url('https://img.freepik.com/free-vector/cruise-liner-ocean-night-modern-ship-boat_107791-1932.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .profile-container {
+      max-width: 800px;
+      margin-top: 40px;
+      padding: 40px;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .profile-details {
+      margin-bottom: 20px;
+    }
+
+    .profile-details strong {
+      width: 240px;
+      display: inline-block;
+    }
+
+    .change-password-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:include="navbar"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="profile-container">
+
+        <h1 class="profile-title">Profile</h1>
+        <div class="profile-details">
+          <strong>Name:</strong> <span th:text="${user.userName}"></span>
+        </div>
+        <div class="profile-details">
+          <strong>Age:</strong> <span th:text="${user.age}"></span>
+        </div>
+        <div class="profile-details">
+          <strong>Mobile Number:</strong> <span th:text="${user.mobNo}"></span>
+        </div>
+        <div class="profile-details">
+          <strong>Email:</strong> <span th:text="${user.userEmail}"></span>
+        </div>
+        <div class="change-password-button">
+          <a th:href="@{/changePage}" class="btn btn-primary">Change Password</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
