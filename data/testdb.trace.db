@@ -1,0 +1,172 @@
+2024-11-12 12:47:34 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERENTITY" not found; SQL statement:
+-- Insert data into UserEntity table
+INSERT INTO UserEntity (userEmail, userPass, userName, age, mobNo) VALUES
+('rahul.sharma@example.com', 'password123', 'Rahul Sharma', 30, '9876543210'),
+('anita.verma@example.com', 'password123', 'Anita Verma', 25, '9876543211'),
+('vikas.kumar@example.com', 'password123', 'Vikas Kumar', 35, '9876543212'),
+('mohit.singh@example.com', 'password123', 'Mohit Singh', 28, '9876543213'),
+('priya.das@example.com', 'password123', 'Priya Das', 22, '9876543214'),
+('amit.jain@example.com', 'password123', 'Amit Jain', 40, '9876543215'),
+('neha.kapoor@example.com', 'password123', 'Neha Kapoor', 32, '9876543216'),
+('rohit.mehra@example.com', 'password123', 'Rohit Mehra', 27, '9876543217'),
+('sneha.patel@example.com', 'password123', 'Sneha Patel', 29, '9876543218'),
+('arjun.nair@example.com', 'password123', 'Arjun Nair', 33, '9876543219') [42102-214]
+2024-11-12 12:47:34 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "SHIPENTITY" not found; SQL statement:
+-- Insert data into ShipEntity table
+INSERT INTO ShipEntity (shipId, shipName, shipModel, source, destination, dateOfJourney, price, seatAvailability) VALUES
+(1, 'INS Vikrant', 'Model A', 'Mumbai', 'Goa', '2023-11-01', 5000, 100),
+(2, 'INS Viraat', 'Model B', 'Chennai', 'Andaman', '2023-11-05', 7000, 80),
+(3, 'INS Shivalik', 'Model C', 'Kochi', 'Lakshadweep', '2023-11-10', 6000, 90),
+(4, 'INS Kolkata', 'Model D', 'Mumbai', 'Lakshadweep', '2023-11-15', 5500, 95),
+(5, 'INS Delhi', 'Model E', 'Chennai', 'Goa', '2023-11-20', 6500, 85),
+(6, 'INS Mysore', 'Model F', 'Kochi', 'Andaman', '2023-11-25', 6000, 90),
+(7, 'INS Rajput', 'Model G', 'Mumbai', 'Chennai', '2023-11-30', 7000, 80),
+(8, 'INS Talwar', 'Model H', 'Goa', 'Mumbai', '2023-12-05', 5000, 100),
+(9, 'INS Trikand', 'Model I', 'Andaman', 'Kochi', '2023-12-10', 6000, 90),
+(10, 'INS Sahyadri', 'Model J', 'Lakshadweep', 'Chennai', '2023-12-15', 6500, 85) [42102-214]
+2024-11-12 12:48:02 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "USEREMAIL" not found; SQL statement:
+INSERT INTO User_Entity (userEmail, userPass, userName, age, mobNo) VALUES
+('rahul.sharma@example.com', 'password123', 'Rahul Sharma', 30, '9876543210'),
+('anita.verma@example.com', 'password123', 'Anita Verma', 25, '9876543211'),
+('vikas.kumar@example.com', 'password123', 'Vikas Kumar', 35, '9876543212'),
+('mohit.singh@example.com', 'password123', 'Mohit Singh', 28, '9876543213'),
+('priya.das@example.com', 'password123', 'Priya Das', 22, '9876543214'),
+('amit.jain@example.com', 'password123', 'Amit Jain', 40, '9876543215'),
+('neha.kapoor@example.com', 'password123', 'Neha Kapoor', 32, '9876543216'),
+('rohit.mehra@example.com', 'password123', 'Rohit Mehra', 27, '9876543217'),
+('sneha.patel@example.com', 'password123', 'Sneha Patel', 29, '9876543218'),
+('arjun.nair@example.com', 'password123', 'Arjun Nair', 33, '9876543219') [42122-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:502)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:749)
+	at org.h2.command.Parser.parseColumn(Parser.java:1256)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1241)
+	at org.h2.command.Parser.parseInsert(Parser.java:1641)
+	at org.h2.command.Parser.parsePrepared(Parser.java:814)
+	at org.h2.command.Parser.parse(Parser.java:689)
+	at org.h2.command.Parser.parse(Parser.java:661)
+	at org.h2.command.Parser.prepareCommand(Parser.java:569)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:631)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:554)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:237)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1339)
+	at org.h2.server.web.WebApp.query(WebApp.java:1137)
+	at org.h2.server.web.WebApp.query(WebApp.java:1113)
+	at org.h2.server.web.WebApp.process(WebApp.java:244)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+2024-11-12 12:48:02 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "SHIPID" not found; SQL statement:
+INSERT INTO Ship_Entity (shipId, shipName, shipModel, source, destination, dateOfJourney, price, seatAvailability) VALUES
+(1, 'INS Vikrant', 'Model A', 'Mumbai', 'Goa', '2023-11-01', 5000, 100),
+(2, 'INS Viraat', 'Model B', 'Chennai', 'Andaman', '2023-11-05', 7000, 80),
+(3, 'INS Shivalik', 'Model C', 'Kochi', 'Lakshadweep', '2023-11-10', 6000, 90),
+(4, 'INS Kolkata', 'Model D', 'Mumbai', 'Lakshadweep', '2023-11-15', 5500, 95),
+(5, 'INS Delhi', 'Model E', 'Chennai', 'Goa', '2023-11-20', 6500, 85),
+(6, 'INS Mysore', 'Model F', 'Kochi', 'Andaman', '2023-11-25', 6000, 90),
+(7, 'INS Rajput', 'Model G', 'Mumbai', 'Chennai', '2023-11-30', 7000, 80),
+(8, 'INS Talwar', 'Model H', 'Goa', 'Mumbai', '2023-12-05', 5000, 100),
+(9, 'INS Trikand', 'Model I', 'Andaman', 'Kochi', '2023-12-10', 6000, 90),
+(10, 'INS Sahyadri', 'Model J', 'Lakshadweep', 'Chennai', '2023-12-15', 6500, 85) [42122-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:502)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:749)
+	at org.h2.command.Parser.parseColumn(Parser.java:1256)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1241)
+	at org.h2.command.Parser.parseInsert(Parser.java:1641)
+	at org.h2.command.Parser.parsePrepared(Parser.java:814)
+	at org.h2.command.Parser.parse(Parser.java:689)
+	at org.h2.command.Parser.parse(Parser.java:661)
+	at org.h2.command.Parser.prepareCommand(Parser.java:569)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:631)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:554)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:237)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1339)
+	at org.h2.server.web.WebApp.query(WebApp.java:1137)
+	at org.h2.server.web.WebApp.query(WebApp.java:1113)
+	at org.h2.server.web.WebApp.process(WebApp.java:244)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
