@@ -37,6 +37,10 @@ public class UserController {
         modelAndView.addObject("credentialsError", error);
         return modelAndView;
     }
+    @GetMapping("/index")
+    public ModelAndView indexPage() {
+        return new ModelAndView("index");
+    }
 
     @PostMapping("/dashboard")
     public ModelAndView loginUser(@RequestParam("userEmail") String userEmail, @RequestParam("userPass") String userPass) {
