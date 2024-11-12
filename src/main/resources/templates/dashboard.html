@@ -38,12 +38,31 @@
             background-color: #007bff !important;
             color: #fff !important;
         }
+
+        /* Footer Styling */
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Ensure responsiveness */
+        @media (max-width: 768px) {
+            .card {
+                width: 90%;
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-<!-- Navbar -->
+<!-- Navbar (Placeholder) -->
 <div th:include="navbar"></div>
 
 <div class="container">
@@ -76,11 +95,12 @@
         </div>
     </div>
 </div>
+
 <!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    // After
+    // After document is ready
     $(document).ready(function () {
         function toggleSearchButton() {
             var from = $('#from').val();
@@ -126,6 +146,11 @@
         toggleSearchButton();
     });
 </script>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Ship Reservation System. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
