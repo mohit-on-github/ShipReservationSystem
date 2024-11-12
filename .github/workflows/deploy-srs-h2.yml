@@ -21,10 +21,6 @@ jobs:
     - name: Build with Maven
       run: mvn clean install
 
-    - name: Deploy to Cloud
-      env:
-        DB_URL: ${{ secrets.DB_URL }}
-        DB_USERNAME: ${{ secrets.DB_USERNAME }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+    - name: Run Spring Boot Application
       run: |
-        mvn spring-boot:run -Dspring-boot.run.arguments="--spring.datasource.url=$DB_URL --spring.datasource.username=$DB_USERNAME --spring.datasource.password=$DB_PASSWORD"
+        mvn spring-boot:run
