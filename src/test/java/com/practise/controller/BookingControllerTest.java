@@ -56,17 +56,22 @@ public class BookingControllerTest {
         assertEquals(true, modelAndView.getModel().get("loginError"));
     }
 
-    @Test
-    public void processPayment_whenUserIsLoggedIn() {
-        httpSession.setAttribute("user", "testUser");
-        when(bookingService.saveBooking(anyInt(), anyString(), anyInt(), anyBoolean())).thenReturn(true);
+@Test
+public void processPayment_whenUserIsLoggedIn() {
+    httpSession.setAttribute("user", "testUser");
 
-        ModelAndView modelAndView = bookingController.processPayment(new BookingDto());
+    BookingDto bookingDto = new BookingDto();
+    bookingDto.setShipId(1);
+    bookingDto.setPassengerName("John Doe");
+    bookingDto.setAge(30);
 
-        assertEquals("redirect:/viewTickets", modelAndView.getViewName());
-        verify(bookingService, times(1)).saveBooking(anyInt(), anyString(), anyInt(), anyBoolean());
-    }
+    when(bookingService.saveBooking(anyInt(), anyString(), anyInt(), anyBoolean())).thenReturn(true);
 
+    ModelAndView modelAndView = bookingController.processPayment(bookingDto);
+
+    assertEquals("redirect:/viewTickets", modelAndView.getViewName());
+    verify(bookingService, times(1)).saveBooking(1, "John Doe", 30, true);
+}
     @Test
     public void processPayment_whenUserIsNotLoggedIn() {
         ModelAndView modelAndView = bookingController.processPayment(new BookingDto());
