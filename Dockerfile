@@ -14,4 +14,4 @@ RUN ./mvnw clean install
 EXPOSE 9095
 
 # Run the application
-CMD ["java", "-jar", "target/your-app-name.jar"]
+CMD ["java", "-jar", "target/ShipRS-0.0.1-SNAPSHOT.jar"]
