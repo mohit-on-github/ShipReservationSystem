@@ -27,7 +27,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/ShipRS-0.0.1-SNAPSHOT.jar:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/your-app-name:latest
 
     - name: Get Render service ID
       id: render_service
