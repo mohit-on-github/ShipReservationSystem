@@ -27,8 +27,8 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         run: |
-          docker build -t $DOCKER_USERNAME/shiprs:latest .
-          docker push $DOCKER_USERNAME/shiprs:latest
+          docker buildx build --push -t $DOCKER_USERNAME/shiprs:latest .
+
 
       - name: Trigger deployment on Render (if applicable)
         env:
