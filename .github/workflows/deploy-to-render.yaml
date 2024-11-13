@@ -30,6 +30,7 @@ jobs:
           docker buildx build --push -t $DOCKER_USERNAME/shiprs:latest .
 
 
+
       - name: Trigger deployment on Render (if applicable)
         env:
           RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
