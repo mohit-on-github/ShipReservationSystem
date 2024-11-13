@@ -1,0 +1,40 @@
+name: Deploy to Render using Docker
+
+on:
+  push:
+    branches:
+      - main  # Only deploy on changes to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Render Docker registry
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        run: |
+          echo $RENDER_API_KEY | docker login --username=render --password-stdin registry.render.com
+
+      - name: Build and push Docker image
+        env:
+          RENDER_REPO: ${{ secrets.RENDER_REPO }}
+        run: |
+          docker build -t registry.render.com/$RENDER_REPO:latest .
+          docker push registry.render.com/$RENDER_REPO:latest
+
+      - name: Trigger deployment on Render
+        env:
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        run: |
+          curl -X POST \
+            -H "Accept: application/json" \
+            -H "Authorization: Bearer $RENDER_API_KEY" \
+            "https://api.render.com/v1/services/$RENDER_SERVICE_ID/deploys"
