@@ -54,16 +54,9 @@ src/
 │   ├── resources/
 │   │   ├── static/
 │   │   ├── templates/
-│   │   │   ├── dashboard.html
-│   │   │   ├── index.html
-│   │   │   └── searchresult.html
 │   │   └── application.properties
 │   └── webapp/
 └── test/
-    └── java/
-        └── com/
-            └── example/
-                └── shipreservationsystem/
 ```
 
 ## Getting Started
@@ -72,6 +65,7 @@ src/
 Ensure you have the following installed on your machine:
 - Java 19 or higher
 - Maven
+- MySQL
 - Docker
 - Git
 
@@ -94,7 +88,7 @@ Ensure you have the following installed on your machine:
    ```sh
    mvn spring-boot:run
    ```
-2. Open your browser and navigate to `http://localhost:8080`.
+2. Open your browser and navigate to `http://localhost:9095`.
 
 ## Docker Setup
 1. Build the Docker image:
@@ -107,13 +101,13 @@ Ensure you have the following installed on your machine:
    ```
 
 ## GitHub Actions CI/CD
-The project uses GitHub Actions for continuous integration and deployment. The workflow file is located in `.github/workflows/ci-cd.yml`.
+The project uses GitHub Actions for continuous integration and deployment. The workflow file is located in `.github/workflows/deploy.yml`.
 
 ## Deployment
 The application is deployed on Render. You can access it live at [https://shipreservationsystem.onrender.com](https://shipreservationsystem.onrender.com).
 
 ## Troubleshooting
-For any issues, please refer to the [GitHub Issues](https://github.com/your-username/ShipReservationSystem/issues) page.
+For any issues, please refer to the [GitHub Issues](https://github.com/mohit-on-github/ShipReservationSystem/issues) page.
 
 ## Usage
 - **Home Page**: Provides an overview and navigation to login and registration pages.
@@ -127,4 +121,4 @@ Contributions are welcome! Please fork the repository and create a pull request 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 ## Contact
-For any inquiries or issues, please contact [your-email@example.com].
+For any inquiries or issues, please contact [official.mohitkr19@gmail.com].
