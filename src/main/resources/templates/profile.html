@@ -40,6 +40,12 @@
       justify-content: center;
       margin-top: 20px;
     }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.5) !important;
+      border: none; /* optional: remove border for a cleaner look */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* for additional visual effect */
+    }
   </style>
 </head>
 <body>
@@ -52,16 +58,16 @@
     <div class="card-body">
       <h1 class="profile-title">Profile</h1>
       <div class="profile-details">
-        <strong>Name:</strong> <span th:text="${user.userName}"></span>
+        <strong>Name:</strong> <span th:text="${user.userName}">John Doe</span>
       </div>
       <div class="profile-details">
-        <strong>Age:</strong> <span th:text="${user.age}"></span>
+        <strong>Age:</strong> <span th:text="${user.age}">30</span>
       </div>
       <div class="profile-details">
-        <strong>Mobile Number:</strong> <span th:text="${user.mobNo}"></span>
+        <strong>Mobile Number:</strong> <span th:text="${user.mobNo}">123-456-7890</span>
       </div>
       <div class="profile-details">
-        <strong>Email:</strong> <span th:text="${user.userEmail}"></span>
+        <strong>Email:</strong> <span th:text="${user.userEmail}">john.doe@example.com</span>
       </div>
       <div class="change-password-button">
         <a th:href="@{/changePage}" class="btn btn-primary">Change Password</a>
