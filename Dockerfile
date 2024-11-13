@@ -1,18 +1,13 @@
 # Stage 1: Build the application
-FROM maven:3.8.5-openjdk-19 AS build
+FROM maven:3.8.5-openjdk-19-slim AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Stage 2: Create the final image with a smaller footprint
+# Stage 2: Run the application
 FROM openjdk:19-jdk-slim
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
-
-# Set the PORT environment variable to match Render’s requirement
-ENV PORT=8080
+COPY --from=build /app/target/ship-reservation-system.jar /app/ship-reservation-system.jar
 EXPOSE 8080
-
-# Run the application
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "ship-reservation-system.jar"]
