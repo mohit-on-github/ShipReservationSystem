@@ -1,17 +1,18 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:19-jdk-alpine
-
-# Set the working directory in the container
+# Stage 1: Build the application
+FROM maven:3.8.5-openjdk-19 AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copy the project files to the container
-COPY . .
+# Stage 2: Create the final image with a smaller footprint
+FROM openjdk:19-jdk-slim
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 
-# Build the project
-RUN ./mvnw clean install
-
-# Expose the port the app runs on
-EXPOSE 9095
+# Set the PORT environment variable to match Render’s requirement
+ENV PORT=8080
+EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "target/ShipRS-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "app.jar"]
