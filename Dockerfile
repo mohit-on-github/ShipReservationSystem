@@ -1,15 +1,17 @@
-# Stage 1: Build the application
-FROM maven:3.8.6-openjdk-18 AS build
-WORKDIR /app
-COPY .mvn/ .mvn
-COPY mvnw .
-COPY pom.xml .
-COPY src ./src
-RUN chmod +x mvnw && ./mvnw clean package -DskipTests
+# Use an official OpenJDK runtime as a parent image
+FROM openjdk:17-jdk-slim
 
-# Stage 2: Run the application
-FROM openjdk:18-jdk-slim
+# Set the working directory in the container
 WORKDIR /app
-COPY --from=build /app/target/ship-reservation-system.jar /app/ship-reservation-system.jar
+
+# Copy the packaged jar file from your local machine into the container
+COPY target/ShipRS-0.0.1-SNAPSHOT.jar /app/ShipRS-0.0.1-SNAPSHOT.jar
+
+# Make the jar file executable
+RUN chmod +x /app/ShipRS-0.0.1-SNAPSHOT.jar
+
+# Run the jar file
+ENTRYPOINT ["java", "-jar", "/app/ShipRS-0.0.1-SNAPSHOT.jar"]
+
+# Expose port 8080 to allow external access
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "ship-reservation-system.jar"]
