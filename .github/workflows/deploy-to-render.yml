@@ -20,7 +20,8 @@ jobs:
         env:
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
         run: |
-          echo $RENDER_API_KEY | docker login --username=render --password-stdin registry.render.com
+          echo $RENDER_API_KEY | docker login --username=render --password-stdin https://registry.render.com
+
 
       - name: Build and push Docker image
         env:
