@@ -3,7 +3,7 @@ name: Deploy to Render
 on:
   push:
     branches:
-      - migrate-to-h2  # Only trigger on the migrate-to-h2 branch
+      - main
 
 jobs:
   build-and-deploy:
@@ -30,11 +30,24 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: docker push mohitkr19/shiprs
 
-      - name: Deploy to Render
+      - name: Fetch Render Service ID
+        id: fetch-service
         env:
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
         run: |
+          # Fetch all services and filter by name
+          SERVICE_ID=$(curl -s -X GET https://api.render.com/v1/services \
+            -H "Authorization: Bearer $RENDER_API_KEY" | \
+            jq -r '.[] | select(.service.name=="<Your-Service-Name>") | .id')
+          echo "Service ID: $SERVICE_ID"
+          echo "SERVICE_ID=$SERVICE_ID" >> $GITHUB_ENV
+
+      - name: Deploy to Render
+        if: env.SERVICE_ID != ''
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          SERVICE_ID: ${{ env.SERVICE_ID }}
+        run: |
           curl -X POST -H "Authorization: Bearer $RENDER_API_KEY" \
-          -d "serviceId=<Your-Service-ID>" \
           -d "clearCache=true" \
-          https://api.render.com/v1/services/<Your-Service-ID>/deploys
+          https://api.render.com/v1/services/$SERVICE_ID/deploys
