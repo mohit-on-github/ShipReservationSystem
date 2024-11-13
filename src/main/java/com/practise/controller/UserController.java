@@ -31,11 +31,15 @@ public class UserController {
     @Autowired
     HttpSession httpSession;
 
-    @GetMapping({"/"})
+    @GetMapping({"/loginPage"})
     public ModelAndView loginPage(@RequestParam(value = "credentialsError", required = false) boolean error) {
         ModelAndView modelAndView = new ModelAndView("login");
         modelAndView.addObject("credentialsError", error);
         return modelAndView;
+    }
+    @GetMapping("/homepage")
+    public ModelAndView indexPage() {
+        return new ModelAndView("index");
     }
 
     @PostMapping("/dashboard")
