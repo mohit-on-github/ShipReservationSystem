@@ -1,6 +1,10 @@
+Here's the updated README file reflecting the changes made to the deployment process:
+
+---
+
 # Ship Reservation System
 
-This is a Java-based Ship Reservation System application. It is built using Spring Boot and Maven and is packaged as a JAR file. The application is deployed using Docker and GitHub Actions, with the deployment hosted on Render.
+This is a Java-based Ship Reservation System application. It is built using Spring Boot and Maven and is packaged as a JAR file. The application is deployed using Docker, and the deployment is hosted on Render. GitHub Actions for CI/CD are no longer used for deployment.
 
 ## Table of Contents
 - [Overview](#overview)
@@ -12,7 +16,6 @@ This is a Java-based Ship Reservation System application. It is built using Spri
   - [Installation](#installation)
   - [Running the Application](#running-the-application)
 - [Docker Setup](#docker-setup)
-- [GitHub Actions CI/CD](#github-actions-cicd)
 - [Deployment](#deployment)
 - [Troubleshooting](#troubleshooting)
 - [Usage](#usage)
@@ -21,7 +24,7 @@ This is a Java-based Ship Reservation System application. It is built using Spri
 - [Contact](#contact)
 
 ## Overview
-The Ship Reservation System is a web application built using Java, Spring Boot, and Maven. It allows users to search for ships, view available seats, and book journeys. The application features a responsive design and secure booking system.
+The Ship Reservation System is a web application built using Java, Spring Boot, and Maven. It allows users to search for ships, view available seats, and book journeys. The application features a responsive design and a secure booking system.
 
 ## Features
 - **Search Ships**: Users can search for ships based on source and destination.
@@ -100,11 +103,8 @@ Ensure you have the following installed on your machine:
    docker run -p 8080:8080 ship-reservation-system
    ```
 
-## GitHub Actions CI/CD
-The project uses GitHub Actions for continuous integration and deployment. The workflow file is located in `.github/workflows/deploy.yml`.
-
 ## Deployment
-The application is deployed on Render. You can access it live at [https://shipreservationsystem.onrender.com](https://shipreservationsystem.onrender.com).
+The application is deployed on Render. You can access it live at [https://shipreservationsystem.onrender.com](https://shipreservationsystem.onrender.com). Render automatically handles deployment from the GitHub repository without the need for GitHub Actions.
 
 ## Troubleshooting
 For any issues, please refer to the [GitHub Issues](https://github.com/mohit-on-github/ShipReservationSystem/issues) page.
@@ -122,3 +122,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 ## Contact
 For any inquiries or issues, please contact [official.mohitkr19@gmail.com].
+
+---
+
+This version of the README removes references to GitHub Actions and clarifies that the deployment is now handled directly by Render. Let me know if you need further adjustments!
