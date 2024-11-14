@@ -1,17 +1,21 @@
 # Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jdk-slim
+FROM openjdk:19-jdk-alpine
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the packaged jar file from your local machine into the container
-COPY target/ShipRS-0.0.1-SNAPSHOT.jar /app/ShipRS-0.0.1-SNAPSHOT.jar
+# Copy the Maven project file and install dependencies
+COPY pom.xml .
+RUN mkdir -p target
 
-# Make the jar file executable
-RUN chmod +x /app/ShipRS-0.0.1-SNAPSHOT.jar
+# Copy the project source code to the container
+COPY . .
 
-# Run the jar file
-ENTRYPOINT ["java", "-jar", "/app/ShipRS-0.0.1-SNAPSHOT.jar"]
+# Package the application (using Maven wrapper if included, otherwise use mvn)
+RUN ./mvnw clean package -DskipTests
 
-# Expose port 8080 to allow external access
-EXPOSE 8080
+# Run the Spring Boot application
+CMD ["java", "-jar", "target/ShipRS-0.0.1-SNAPSHOT.jar"]
+
+# Expose the application port
+EXPOSE 9095
