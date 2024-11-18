@@ -53,7 +53,7 @@ public class UserController {
             modelAndView.addObject("destinations", destinations);
             return modelAndView;
         } else {
-            ModelAndView modelAndView = new ModelAndView("redirect:/");
+            ModelAndView modelAndView = new ModelAndView("redirect:/loginPage");
             modelAndView.addObject("credentialsError", true);
             return modelAndView;
         }

@@ -4,85 +4,100 @@
 <head>
     <meta charset="UTF-8">
     <title>Card Payment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <style>
-        .container {
-            margin-top: 50px;
-        }
-
         body {
             background-image: url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
+            background-attachment: fixed;
         }
+
         .card {
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(255, 255, 255, 0.85);
             max-width: 500px;
             margin: 0 auto;
-            margin-top: 50px;
             padding: 30px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 576px) {
+            .card {
+                padding: 20px;
+                margin-top: 20px;
+            }
+
+            .card-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .form-text {
+                font-size: 0.875rem;
+            }
+
+            .btn-primary {
+                width: 100%;
+            }
         }
     </style>
 </head>
 
 <body>
-<div class="container">
+<div class="container-fluid px-3">
 
-    <div class="card">
-        <div class="card-header">
-            <h2 class="text-center mb-3">Card Payment</h2>
+    <div class="card mt-5">
+        <div class="card-header text-center">
+            <h2>Card Payment</h2>
         </div>
         <div class="card-body">
             <form action="/processPayment" method="post">
-
-
                 <input type="hidden" id="shipId" name="shipId" th:value="${booking.shipId}">
                 <input type="hidden" id="passengerName" name="passengerName" th:value="${booking.passengerName}">
                 <input type="hidden" id="age" name="age" th:value="${booking.age}">
 
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="price">Total Amount:</label>
                     <input type="text" id="price" name="price" th:value="${booking.price}" readonly class="form-control">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="cardNumber">Card Number</label>
                     <input type="text" id="cardNumber" name="cardNumber" placeholder="Card Number" required
                            pattern="[0-9]{4}( ?[0-9]{4}){3}" class="form-control">
                     <small class="form-text text-muted">Please enter a 16-digit card number.</small>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="expiryDate">Expiry Date</label>
                     <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required
                            pattern="^(0[1-9]|1[0-2])\/?([0-9]{2})$" class="form-control">
                     <small class="form-text text-muted">Please enter a valid expiry date in the format MM/YY.</small>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="cvv">CVV</label>
                     <input type="text" id="cvv" name="cvv" placeholder="CVV" required
                            pattern="[0-9]{3}" class="form-control">
                     <small class="form-text text-muted">Please enter a 3 digit CVV.</small>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="cardName">Name on Card</label>
                     <input type="text" id="cardName" name="cardName" placeholder="Name on Card" required
                            pattern="[A-Za-z ]+" class="form-control">
                     <small class="form-text text-muted">Please enter the name as it appears on the card.</small>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Pay</button>
+                <button type="submit" class="btn btn-primary mt-3">Pay</button>
             </form>
         </div>
     </div>
 </div>
 
 <!-- Footer -->
-<footer class="bg-primary text-white text-center py-3">
+<footer class="bg-primary text-white text-center py-3 mt-5">
     <div class="container">
-        <p> copyright © 2024 Ship Reservation System. All rights reserved.</p>
+        <p>&copy; 2024 Ship Reservation System. All rights reserved.</p>
     </div>
 </footer>
 

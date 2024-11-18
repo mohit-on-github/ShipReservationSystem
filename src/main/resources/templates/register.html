@@ -24,6 +24,11 @@
     .card-title {
       text-align: center;
     }
+
+    .text-danger {
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
   </style>
 </head>
 <body>
@@ -32,7 +37,7 @@
     <div class="card-body">
       <h5 class="card-title">Register for an account</h5>
 
-      <form th:action="@{/register}" method="post">
+      <form th:action="@{/register}" method="post" onsubmit="return validatePassword()">
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
           <input type="text" class="form-control" id="name" name="userName" required pattern="[A-Za-z\s]+" title="Name must contain only letters and spaces">
@@ -43,11 +48,22 @@
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="userPass" required minlength="6">
+          <div class="input-group">
+            <input type="password" class="form-control" id="password" name="userPass" required minlength="6" oninput="checkPasswordMatch()">
+            <button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('password')">Show</button>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="confirm-password" class="form-label">Confirm Password</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="confirm-password" required oninput="checkPasswordMatch()">
+            <button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('confirm-password')">Show</button>
+          </div>
+          <div id="password-match-error" class="text-danger" style="display: none;">Passwords do not match</div>
         </div>
         <div class="mb-3">
           <label for="age" class="form-label">Age</label>
-          <input type="number" class="form-control" id="age" name="age" min="12" max="80" title="Age must be a positive number">
+          <input type="number" class="form-control" id="age" name="age" min="16" max="80" title="Age must be a positive number">
         </div>
         <div class="mb-3">
           <label for="mobile" class="form-label">Mobile Number</label>
@@ -57,6 +73,11 @@
           <button type="submit" class="btn btn-primary">Register</button>
         </div>
       </form>
+
+      <!-- Login Link -->
+      <p class="text-center mt-3">
+        Already have an account? <a href="/loginPage" class="text-primary">Login here</a>
+      </p>
     </div>
   </div>
 </div>
@@ -70,6 +91,42 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+<script>
+  function togglePasswordVisibility(id) {
+    const passwordField = document.getElementById(id);
+    const button = passwordField.nextElementSibling;
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      button.textContent = "Hide";
+    } else {
+      passwordField.type = "password";
+      button.textContent = "Show";
+    }
+  }
+
+  function checkPasswordMatch() {
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+    const errorDiv = document.getElementById("password-match-error");
+
+    if (password && confirmPassword && password !== confirmPassword) {
+      errorDiv.style.display = "block";
+    } else {
+      errorDiv.style.display = "none";
+    }
+  }
+
+  function validatePassword() {
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return false;
+    }
+    return true;
+  }
+</script>
 
 </body>
 </html>
