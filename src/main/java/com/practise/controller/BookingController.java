@@ -1,6 +1,7 @@
 package com.practise.controller;
 
-import com.practise.dto.BookingDto;
+import com.practise.dto.BookingViewDto;
+import com.practise.dto.BookingRequestDto;
 import com.practise.entity.BookingEntity;
 import com.practise.service.BookingService;
 import com.practise.service.ShipService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,7 +33,7 @@ public class BookingController {
     @GetMapping("/book-ship")
     public ModelAndView getBookingDetails(@RequestParam("shipId") int shipId) {
         if (httpSession.getAttribute("user") != null) {
-            BookingDto shipDetails = shipService.getShipDetails(shipId);
+            BookingViewDto shipDetails = shipService.getShipDetails(shipId);
             ModelAndView modelAndView = new ModelAndView("booking");
             modelAndView.addObject("booking", shipDetails);
             return modelAndView;
@@ -43,12 +45,13 @@ public class BookingController {
     }
 
     @GetMapping("/payment")
-    public ModelAndView cardPayment(BookingDto booking
-//                @RequestParam("shipId") int shipId,
-//                                        @RequestParam String passengerName,
-//                                        @RequestParam int age
-    ) {
+    public ModelAndView cardPayment(@ModelAttribute BookingRequestDto bookingRequest
+                                    ) {
         if (httpSession.getAttribute("user") != null) {
+            BookingViewDto booking = shipService.getShipDetails(bookingRequest.getShipId());
+            booking.setPassengerName(bookingRequest.getPassengerName());
+            booking.setAge(bookingRequest.getAge());
+
             ModelAndView modelAndView = new ModelAndView("payment");
             modelAndView.addObject("booking", booking);
             return modelAndView;
@@ -60,9 +63,13 @@ public class BookingController {
     }
 
     @PostMapping("/processPayment")
-    public ModelAndView processPayment(BookingDto booking) {
+    public ModelAndView processPayment(@ModelAttribute BookingRequestDto bookingRequest) {
         if (httpSession.getAttribute("user") != null) {
-            bookingService.saveBooking(booking.getShipId(), booking.getPassengerName(), booking.getAge(),true);
+            bookingService.saveBooking(
+                    bookingRequest.getShipId(),
+                    bookingRequest.getPassengerName(),
+                    bookingRequest.getAge(),
+                    true);
             return new ModelAndView("redirect:/viewTickets");
         } else {
             ModelAndView modelAndView = new ModelAndView("login");

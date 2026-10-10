@@ -1,6 +1,6 @@
 package com.practise.service;
 
-import com.practise.dto.BookingDto;
+import com.practise.dto.BookingViewDto;
 import com.practise.entity.ShipEntity;
 import com.practise.entity.UserEntity;
 import com.practise.repository.ShipRepository;
@@ -41,12 +41,12 @@ public class ShipService {
         return allShips;
     }
 
-    public BookingDto getShipDetails(int shipId){
+    public BookingViewDto getShipDetails(int shipId){
         ShipEntity shipEntity = shipRepository.findAllByShipId(shipId);
 
 
         UserEntity userEntity = new UserEntity();
-        BookingDto bookingDto = new BookingDto();
+        BookingViewDto bookingDto = new BookingViewDto();
         bookingDto.setShipId(shipEntity.getShipId());
         bookingDto.setShipName(shipEntity.getShipName());
         bookingDto.setShipModel(shipEntity.getShipModel());

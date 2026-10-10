@@ -1,14 +1,17 @@
 package com.practise.controller;
 
+import com.practise.dto.ChangePasswordRequestDto;
+import com.practise.dto.LoginRequestDto;
+import com.practise.dto.RegisterUserDto;
 import com.practise.entity.BookingEntity;
 import com.practise.entity.UserEntity;
-import com.practise.service.BookingService;
 import com.practise.service.LoginService;
 import com.practise.service.ShipService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,10 +20,6 @@ import java.util.HashSet;
 
 @Controller
 public class UserController {
-
-
-    @Autowired
-    BookingService bookingService;
 
     @Autowired
     LoginService loginService;
@@ -31,20 +30,14 @@ public class UserController {
     @Autowired
     HttpSession httpSession;
 
-    @GetMapping({"/loginPage"})
-    public ModelAndView loginPage(@RequestParam(value = "credentialsError", required = false) boolean error) {
-        ModelAndView modelAndView = new ModelAndView("login");
-        modelAndView.addObject("credentialsError", error);
-        return modelAndView;
-    }
     @GetMapping("/homepage")
     public ModelAndView indexPage() {
         return new ModelAndView("index");
     }
 
     @PostMapping("/dashboard")
-    public ModelAndView loginUser(@RequestParam("userEmail") String userEmail, @RequestParam("userPass") String userPass) {
-        if (loginService.validateUser(userEmail, userPass)) {
+    public ModelAndView loginUser(@ModelAttribute LoginRequestDto loginRequest) {
+        if (loginService.validateUser(loginRequest.getUserEmail(),loginRequest.getUserPass())) {
             ModelAndView modelAndView = new ModelAndView("dashboard");
 
             HashSet<String> sources = shipService.getAllSources();
@@ -57,6 +50,13 @@ public class UserController {
             modelAndView.addObject("credentialsError", true);
             return modelAndView;
         }
+    }
+
+    @GetMapping({"/loginPage"})
+    public ModelAndView loginPage(@RequestParam(value = "credentialsError", required = false) boolean error) {
+        ModelAndView modelAndView = new ModelAndView("login");
+        modelAndView.addObject("credentialsError", error);
+        return modelAndView;
     }
 
     @GetMapping("/home")
@@ -83,12 +83,12 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ModelAndView registerUser(@RequestParam("userName") String userName,
-                                     @RequestParam("userEmail") String userEmail,
-                                     @RequestParam("userPass") String userPass,
-                                     @RequestParam("age") int age,
-                                     @RequestParam("MobNo") String mobNo) {
-        if (loginService.saveUser(userName, userEmail, userPass, age, mobNo)) {
+    public ModelAndView registerUser(@ModelAttribute RegisterUserDto registerUser) {
+        if (loginService.saveUser(registerUser.getUserName(),
+                                    registerUser.getUserEmail(),
+                                    registerUser.getUserPass(),
+                                    registerUser.getAge(),
+                                    registerUser.getMobNo())) {
             ModelAndView modelAndView = new ModelAndView("login");
             modelAndView.addObject("save", true);
             return modelAndView;
@@ -128,11 +128,9 @@ public class UserController {
 
 
     @PostMapping("/changePassword")
-    public ModelAndView changerUserPass(@RequestParam("currentPassword") String currentPass,
-                                        @RequestParam("newPassword") String newPass) {
-
+    public ModelAndView changerUserPass(@ModelAttribute ChangePasswordRequestDto changePasswordRequest) {
         if (httpSession.getAttribute("user") != null) {
-            String passCheck = loginService.setNewPass(currentPass, newPass);
+            String passCheck = loginService.setNewPass(changePasswordRequest.getCurrentPassword(), changePasswordRequest.getNewPassword());
             if (passCheck.equals("changed")) {
                 ModelAndView modelAndView = new ModelAndView("changePass");
                 modelAndView.addObject("changePassSuccess", true);

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 
 @Data
-public class BookingDto {
+public class BookingViewDto {
     private int shipId;
     private String Source;
     private String Destination;
